@@ -1,0 +1,14 @@
+pub_key = np.load('key_pub.npz', allow_pickle=True)
+p = EisensteinElement(pub_key['p'].item().x, pub_key['p'].item().y)
+q = EisensteinElement(pub_key['q'].item().x, pub_key['q'].item().y)
+etru = ETRU(int(pub_key['N']), p, q)
+etru.h_poly = EisensteinPolynomial(list(pub_key['h']))
+msg_poly = message_to_poly('I am Maozihao')
+randn_poly=_generate_random_ploy(etru.N // 8)
+output = etru.encrypt(msg_poly, randn_poly).coefficients
+
+priv_key = np.load('key_priv.npz', allow_pickle=True)
+etru = ETRU(int(priv_key['N']), p, q)
+etru.f_poly = EisensteinPolynomial(list(priv_key['f']))
+etru.f_p_poly = EisensteinPolynomial(list(priv_key['f_p']))
+out=etru.decrypt(EisensteinPolynomial(list(output))).coefficients
