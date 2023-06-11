@@ -44,4 +44,4 @@ Or you can skip the step above by modifying the `is_prime()` method in `Eisenste
             return False
 ```
 
-Now this project has a problem of unequal encryption and decryption, my classmate and I am fixing it.
+Now this project has a problem of unequal encryption and decryption, my classmate and I are fixing it.
