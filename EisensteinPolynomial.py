@@ -4,7 +4,6 @@ Definition of Eisenstein Polynomial. Polynomial which coefficients are all Eisen
 '''
 from Eisenstein import EisensteinElement
 
-
 zero = EisensteinElement(0, 0)
 one = EisensteinElement(1, 0)
 
@@ -37,7 +36,7 @@ def _extend_euclid(f, g, module):
 class EisensteinPolynomial():
     def __init__(self, coefficients: list, mod=None):
         self.coefficients = coefficients
-        #self.mod = mod
+        # self.mod = mod
         # self.domain = domain
 
     def __bool__(self):
@@ -62,8 +61,8 @@ class EisensteinPolynomial():
         return hash(self.coefficients)
 
     def __eq__(self, other):
-        if isinstance(other,EisensteinPolynomial):
-            if other.coefficients==self.coefficients:
+        if isinstance(other, EisensteinPolynomial):
+            if other.coefficients == self.coefficients:
                 return True
             return False
         return TypeError(f"{self} and {other} are not the same type !")
@@ -74,7 +73,6 @@ class EisensteinPolynomial():
                 return False
             return True
         return TypeError(f"{self} and {other} are not the same type !")
-
 
     def __add__(self, other):
         if isinstance(other, EisensteinPolynomial):
@@ -98,7 +96,7 @@ class EisensteinPolynomial():
 
     def __sub__(self, other):
         if isinstance(other, EisensteinPolynomial):
-            neg_other = EisensteinPolynomial([zero-coeff for coeff in other.coefficients])
+            neg_other = EisensteinPolynomial([zero - coeff for coeff in other.coefficients])
             return self + neg_other
         return NotImplemented
 
@@ -123,7 +121,7 @@ class EisensteinPolynomial():
     def __mod__(self, other, module=None):
         if isinstance(other, EisensteinPolynomial):
             # Perform polynomial division
-            quotient, remainder = _divmod(self, other, module)
+            quotient, remainder = _divmod(self, other,module)
 
             # Return the remainder as a new polynomial
             return remainder
@@ -146,16 +144,17 @@ class EisensteinPolynomial():
     def invert(self, mod, module):
         if isinstance(mod, EisensteinPolynomial):
             h, a, b = _extend_euclid(self, mod, module)
-            if len(h.coefficients)==1:
-                return (a*h.coefficients[0].invert(mod=module)) % module
-            #if h == EisensteinPolynomial([EisensteinElement(1, 0)]):
-                #return a
+            if len(h.coefficients) == 1:
+                return (a * h.coefficients[0].invert(mod=module)) % module
+            # if h == EisensteinPolynomial([EisensteinElement(1, 0)]):
+            # return a
             raise ZeroDivisionError(f"{self.__str__()} has no inverse in mod {mod.__str__()}")
         return NotImplemented
 
 
 def _divmod(self: EisensteinPolynomial, other: EisensteinPolynomial, module: EisensteinElement = None):
     if not isinstance(other, EisensteinPolynomial): return NotImplemented
+    #if other.coefficients[0] != one: return NotImplemented
     dividend_coeffs = self.coefficients
     divisor_coeffs = other.coefficients
     # Ensure the divisor is not zero
@@ -163,7 +162,7 @@ def _divmod(self: EisensteinPolynomial, other: EisensteinPolynomial, module: Eis
         raise ZeroDivisionError("Polynomial division by zero")
 
     # Initialize the quotient and remainder as empty lists
-    quotient_coeffs = [zero]*(len(dividend_coeffs)-len(divisor_coeffs)+1)
+    quotient_coeffs = [zero] * (len(dividend_coeffs) - len(divisor_coeffs) + 1)
     remainder_coeffs = dividend_coeffs.copy()
 
     # Perform long division algorithm
@@ -177,12 +176,12 @@ def _divmod(self: EisensteinPolynomial, other: EisensteinPolynomial, module: Eis
         quotient_leading = dividend_leading * divisor_leading.invert(mod=module)
 
         # Add the quotient to the quotient list
-        quotient_coeffs[len(divisor_coeffs)-len(remainder_coeffs)-1] = quotient_leading
+        quotient_coeffs[len(divisor_coeffs) - len(remainder_coeffs) - 1] = quotient_leading
 
         # Multiply the divisor by the quotient and subtract from the dividend
         for i in range(len(divisor_coeffs)):
             remainder_coeffs[i] -= quotient_leading * divisor_coeffs[i]
-            remainder_coeffs[i] = remainder_coeffs[i]%module
+            remainder_coeffs[i] = remainder_coeffs[i] % module
 
         # Remove leading zeros in the remainder
         while len(remainder_coeffs) > 0 and remainder_coeffs[0] == zero:
@@ -204,6 +203,6 @@ if __name__ == "__main__":
     print(f"gpoly = {gpoly}")
     fqpoly = fpoly % q
     print(f"fqpoly = {fqpoly}")
-    a, b = _divmod(fpoly, gpoly, q)
+    a, b = _divmod(fpoly, gpoly,q)
     print(f"a = {a}")
-    fq_poly=fqpoly.invert(mod=fpoly,module=q)
+    fq_poly = fqpoly.invert(mod=fpoly, module=q)

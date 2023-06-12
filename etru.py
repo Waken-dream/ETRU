@@ -26,7 +26,6 @@ from utils import *
 Debug = True  # DeBug Mode
 
 
-
 def generate(N, p, q, priv_key: object, pub_key):
     etru = ETRU(N, p, q)
     etru.generate_random_keys()
@@ -35,9 +34,11 @@ def generate(N, p, q, priv_key: object, pub_key):
     h = np.array(etru.h_poly.coefficients)
     f = np.array(etru.f_poly.coefficients)
     f_p = np.array(etru.f_p_poly.coefficients)
+    g = np.array(etru.g_poly.coefficients)
+    f_q = np.array(etru.f_q_poly.coefficients)
     # save_dict_with_pickle({N: N, p: p, q: q, f: f, f_p: f_p}, priv_key)
     # save_dict_with_pickle({N: N, p: p, q: q, h: h}, pub_key)
-    np.savez_compressed(priv_key, N=N, p=p, q=q, f=f, f_p=f_p)
+    np.savez_compressed(priv_key, N=N, p=p, q=q, f=f, f_p=f_p, g=g, f_q=f_q)
     np.savez_compressed(pub_key, N=N, p=p, q=q, h=h)
 
 
@@ -63,14 +64,15 @@ def encrypt(pub_key, input_str: str, block=False) -> np.array:
         output = np.array([])
         block_count = input_arr.shape[0]
         for i, b in enumerate(input_arr, start=1):
-            block_output = etru.encrypt(EisensteinPolynomial(list(b)), EisensteinPolynomial(_generate_random_ploy(etru.N // 8))).coefficients
+            block_output = etru.encrypt(EisensteinPolynomial(list(b)),
+                                        EisensteinPolynomial(_generate_random_ploy(etru.N // 8))).coefficients
             if len(block_output) < 2 * etru.N:
                 block_output = np.pad(block_output, (0, 2 * etru.N - len(block_output)), 'constant')
             output = np.concatenate((output, block_output))
     return np.array(output).flatten()
 
 
-def decrypt(priv_key_file, input_str:str, block=False):
+def decrypt(priv_key_file, input_str: str, block=False):
     priv_key = np.load(priv_key_file, allow_pickle=True)
     p = EisensteinElement(priv_key['p'].item().x, priv_key['p'].item().y)
     q = EisensteinElement(priv_key['q'].item().x, priv_key['q'].item().y)
@@ -81,7 +83,7 @@ def decrypt(priv_key_file, input_str:str, block=False):
     input_arr = np.trim_zeros(input_arr)
 
     if not block:
-        if 2*etru.N < len(input_arr):
+        if 2 * etru.N < len(input_arr):
             raise OverflowError("Input is too large for current N")
         return etru.decrypt(message_to_poly(input_str)).coefficients
     else:
@@ -96,18 +98,16 @@ def decrypt(priv_key_file, input_str:str, block=False):
         return padding_decode(output, etru.N)
 
 
-
 def verify():
     if not Debug:
         raise NotImplementedError("Verify is specially designed for Debug mode")
-
 
 
 if __name__ == "__main__":
     if Debug:
         N = 251
         p = EisensteinElement(2, 3)
-        q = EisensteinElement(-9, -9)
+        q = EisensteinElement(0, 167)
         # poly = message_to_poly("My name is Maozihao")
         # string=poly_to_message(poly)
         # generate(N, p, q, 'key_priv', 'key_pub')
@@ -115,6 +115,7 @@ if __name__ == "__main__":
         message = "I am Maozihao"
         input_poly = message_to_poly(message)
         print(f"input poly = {input_poly}")
+        '''
         output1 = encrypt('key_pub.npz', message)
         encrypt_poly = EisensteinPolynomial(list(output1))
 
@@ -123,7 +124,7 @@ if __name__ == "__main__":
         etru.f_poly = EisensteinPolynomial(list(priv_key['f']))
         etru.f_p_poly = EisensteinPolynomial(list(priv_key['f_p']))
         decrypt_poly = etru.decrypt(encrypt_poly)
-
+    '''
 
 
 
@@ -148,11 +149,12 @@ if __name__ == "__main__":
             input_arr = np.trim_zeros(input_arr, 'b')
 
         if args['gen']:
-            generate(int(args['N']), EisensteinElement(*args['P']), EisensteinElement(*args['Q']), args['PRIV_KEY_FILE'], args['PUB_KEY_FILE'])
+            generate(int(args['N']), EisensteinElement(*args['P']), EisensteinElement(*args['Q']),
+                     args['PRIV_KEY_FILE'], args['PUB_KEY_FILE'])
         elif args['enc']:
             output = encrypt(args['PUB_KEY_FILE'], input_str, block=block)
         elif args['dec']:
-            output = decrypt(args['PRIV_KEY_FILE'], input_str,  block=block)
+            output = decrypt(args['PRIV_KEY_FILE'], input_str, block=block)
 
         if not args['gen']:
             if poly_output:
@@ -160,5 +162,5 @@ if __name__ == "__main__":
             else:
                 sys.stdout.buffer.write(np.packbits(np.array(output).astype(int)).tobytes())
 
-#echo "hello!" | ./etru.py enc keypub.npz
-#./etru.py gen 251 (2,3) (1,-1) key_priv key_pub
+# echo "hello!" | ./etru.py enc keypub.npz
+# ./etru.py gen 251 (2,3) (1,-1) key_priv key_pub
