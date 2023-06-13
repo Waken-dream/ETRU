@@ -99,10 +99,6 @@ class ETRU:
         self.g_poly = g_poly
         self.f_p_poly = self.f_poly.invert(mod=self.R_poly, module=self.p)
         self.f_q_poly = self.f_poly.invert(mod=self.R_poly, module=self.q)
-        p_f_q_poly = (self.f_q_poly * self.p) % self.q
-        h_before_mod = (p_f_q_poly * self.g_poly) % self.q
-        # self.h_poly = (h_before_mod.__mod__(self.R_poly, self.q)) % self.q
-        # self.h_poly = (self.f_q_poly * self.g_poly).__mod__(self.R_poly, self.q) % self.q
         self.h_poly = mod(self.f_q_poly * self.g_poly, self.R_poly) % self.q
 
     def encrypt(self, msg_poly: EisensteinPolynomial, rand_poly: EisensteinPolynomial) -> EisensteinPolynomial:
