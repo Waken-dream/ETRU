@@ -114,3 +114,9 @@ OverflowError: Input is too large for current N
 ```
 
 In this case, you can use the block mode, which splits the input into blocks of the requested size. Make sure you are using this mode in both encrypting and decrypting process.
+
+```shell
+(base)% python etru.py -b enc key_pub.npz plaintext.txt
+```
+If you want more information, see the code in `etru.py`.
+If you are also a BUAAer, we are friends.
