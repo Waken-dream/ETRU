@@ -55,9 +55,40 @@ To generate random public and private key pair execute:
 (0 + 1*omega)x^244 + (1 + 0*omega)x^243 + (-1 + 0*omega)x^242 + (0 + 1*omega)x^241 + (0 + 1*omega)x^240 + (1 + 1*omega)x^239 + (1 + 1*omega)x^237 + (-1 + 0*omega)x^236 + (1 + 0*omega)x^235 + (-1 + -1*omega)x^233 + (-1 + -1*omega)x^232 + (-1 + -1*omega)x^231 + (0 + 1*omega)x^230 + (1 + 1*omega)x^228 + (0 + -1*omega)x^227 + (1 + 0*omega)x^226 + (1 + 0*omega)x^225 + (0 + 1*omega)x^224 + (1 + 1*omega)x^223 + (-1 + 0*omega)x^222 + (1 + 0*omega)x^221 + (-1 + -1*omega)x^220 + (-1 + -1*omega)x^219 + (0 + -1*omega)x^217 + (1 + 0*omega)x^216 + (-1 + 0*omega)x^215 + (0 + -1*omega)x^214 + (-1 + 0*omega)x^213 + (-1 + 0*omega)x^212 + (0 + 1*omega)x^211 + (1 + 0*omega)x^209 + (-1 + -1*omega)x^208 + (0 + 1*omega)x^206 + (1 + 0*omega)x^205 + (-1 + -1*omega)x^204 + (1 + 0*omega)x^202 + (1 + 1*omega)x^201 + (1 + 0*omega)x^200 + (0 + 1*omega)x^199 + (0 + 1*omega)x^198 + (1 + 1*omega)x^197 + (-1 + -1*omega)x^196 + (1 + 0*omega)x^195 + (-1 + 0*omega)x^194 + (1 + 1*omega)x^193 + (1 + 0*omega)x^192 + (0 + -1*omega)x^191 + (1 + 0*omega)x^188 + (1 + 0*omega)x^185 + (1 + 0*omega)x^184 + (1 + 1*omega)x^183 + (-1 + -1*omega)x^182 + (0 + -1*omega)x^181 + (-1 + 0*omega)x^180 + (0 + 1*omega)x^178 + (-1 + -1*omega)x^177 + (0 + -1*omega)x^175 + (1 + 0*omega)x^174 + (1 + 1*omega)x^172 + (0 + -1*omega)x^171 + (1 + 0*omega)x^170 + (0 + 1*omega)x^169 + (0 + 1*omega)x^168 + (0 + -1*omega)x^167 + (0 + -1*omega)x^166 + (0 + 1*omega)x^165 + (0 + 1*omega)x^164 + (-1 + -1*omega)x^163 + (1 + 1*omega)x^162 + (1 + 1*omega)x^161 + (1 + 1*omega)x^160 + (-1 + 0*omega)x^157 + (1 + 1*omega)x^156 + (0 + -1*omega)x^155 + (1 + 0*omega)x^154 + (1 + 0*omega)x^153 + (1 + 0*omega)x^152 + (-1 + 0*omega)x^151 + (1 + 1*omega)x^150 + (-1 + 0*omega)x^149 + (-1 + 0*omega)x^148 + (1 + 1*omega)x^147 + (1 + 1*omega)x^146 + (-1 + -1*omega)x^144 + (1 + 1*omega)x^143 + (0 + 1*omega)x^142 + (0 + -1*omega)x^141 + (-1 + -1*omega)x^140 + (1 + 1*omega)x^139 + (-1 + -1*omega)x^138 + (0 + 1*omega)x^137 + (0 + 1*omega)x^136 + (-1 + 0*omega)x^135 + (1 + 1*omega)x^134 + (-1 + -1*omega)x^132 + (1 + 0*omega)x^131 + (0 + -1*omega)x^130 + (0 + 1*omega)x^126 + (-1 + -1*omega)x^125 + (-1 + 0*omega)x^124 + (0 + -1*omega)x^123 + (0 + -1*omega)x^122 + (1 + 1*omega)x^121 + (1 + 1*omega)x^120 + (-1 + -1*omega)x^119 + (-1 + -1*omega)x^118 + (-1 + 0*omega)x^117 + (-1 + -1*omega)x^116 + (-1 + -1*omega)x^115 + (1 + 1*omega)x^114 + (0 + 1*omega)x^113 + (-1 + 0*omega)x^112 + (0 + 1*omega)x^111 + (0 + 1*omega)x^109 + (0 + -1*omega)x^108 + (-1 + 0*omega)x^107 + (-1 + -1*omega)x^106 + (-1 + 0*omega)x^105 + (-1 + 0*omega)x^104 + (-1 + 0*omega)x^103 + (0 + -1*omega)x^101 + (1 + 0*omega)x^99 + (0 + 1*omega)x^98 + (-1 + 0*omega)x^97 + (-1 + -1*omega)x^96 + (1 + 1*omega)x^95 + (0 + 1*omega)x^94 + (0 + -1*omega)x^93 + (1 + 0*omega)x^92 + (-1 + -1*omega)x^91 + (1 + 0*omega)x^90 + (0 + -1*omega)x^89 + (-1 + -1*omega)x^88 + (0 + 1*omega)x^87 + (0 + -1*omega)x^86 + (0 + -1*omega)x^85 + (-1 + 0*omega)x^84 + (-1 + 0*omega)x^83 + (0 + -1*omega)x^82 + (-1 + 0*omega)x^81 + (0 + -1*omega)x^80 + (-1 + 0*omega)x^79 + (1 + 1*omega)x^78 + (-1 + 0*omega)x^77 + (1 + 1*omega)x^76 + (1 + 0*omega)x^75 + (0 + -1*omega)x^73 + (0 + 1*omega)x^72 + (1 + 1*omega)x^71 + (1 + 1*omega)x^70 + (0 + 1*omega)x^69 + (-1 + 0*omega)x^68 + (0 + 1*omega)x^65 + (0 + -1*omega)x^64 + (0 + 1*omega)x^63 + (0 + 1*omega)x^62 + (0 + -1*omega)x^61 + (-1 + -1*omega)x^60 + (-1 + 0*omega)x^59 + (-1 + -1*omega)x^57 + (-1 + 0*omega)x^55 + (1 + 0*omega)x^53 + (0 + 1*omega)x^51 + (1 + 0*omega)x^50 + (-1 + -1*omega)x^49 + (1 + 1*omega)x^48 + (-1 + -1*omega)x^47 + (0 + 1*omega)x^46 + (-1 + 0*omega)x^45 + (1 + 1*omega)x^44 + (-1 + 0*omega)x^42 + (1 + 1*omega)x^41 + (0 + -1*omega)x^40 + (0 + -1*omega)x^39 + (0 + 1*omega)x^38 + (1 + 0*omega)x^37 + (-1 + -1*omega)x^36 + (0 + -1*omega)x^35 + (1 + 1*omega)x^34 + (0 + 1*omega)x^33 + (-1 + -1*omega)x^32 + (1 + 1*omega)x^31 + (0 + -1*omega)x^30 + (1 + 0*omega)x^29 + (-1 + -1*omega)x^28 + (1 + 0*omega)x^27 + (0 + 1*omega)x^26 + (1 + 1*omega)x^25 + (-1 + -1*omega)x^24 + (0 + 1*omega)x^23 + (1 + 0*omega)x^22 + (1 + 0*omega)x^21 + (0 + -1*omega)x^20 + (0 + -1*omega)x^19 + (0 + -1*omega)x^18 + (0 + -1*omega)x^17 + (-1 + -1*omega)x^16 + (0 + -1*omega)x^15 + (1 + 0*omega)x^14 + (1 + 1*omega)x^13 + (1 + 0*omega)x^12 + (-1 + 0*omega)x^10 + (-1 + -1*omega)x^9 + (0 + -1*omega)x^8 + (1 + 0*omega)x^7 + (-1 + -1*omega)x^6 + (-1 + 0*omega)x^4 + (1 + 0*omega)x^3 + (1 + 1*omega)x^2 + (-1 + 0*omega)x^1 + (-1 + 0*omega)
 ```
 
-Attention: $N,\ p,\ q$ should not be changed arbitrarily, input strings are encode into domain $R_p$. In this program, $p$ is set to be Eisenstein prime $2+3\omega$ so that $R_p=\{ 0,\pm1,\pm\omega,\pm\omega^2 \}$, $q$ is set to be $167\omega$ far bigger than $p$ to prevent decryption failure.
+Attention: $N,\ p,\ q$ should not be changed arbitrarily, input strings are encode into domain $R_p$. In this program, $p$ is set to be Eisenstein prime $2+3\omega$ so that $R_p=\{0,\pm1,\pm\omega,\pm\omega^2\}$, $q$ is set to be $167\omega$ far bigger than $p$ to prevent decryption failure.
 
-If you really want to change the value of $N,\ p,\ q$, modify the `eisenstein_encode` and `eisenstein_decode` function in `utils.py` accordingly. Larger $p$ can reduce the degree of message polynomial.
+If you really want to change the value of $N,\ p,\ q$, modify the `eisenstein_encode` and `eisenstein_decode` function in `utils.py` accordingly. Larger $p$ can reduce the degree of message polynomial，but it needs $q$ also be larger to prevent decryption failure.
+
+> We want to verify that $m′ = m$, that is we have recovered our original message $m$. First we must compute the polynomial $a$:
+>
+> $$
+> \begin{aligned}
+> a&=f\times e \ mod\ q\\
+> &\equiv pf\times \phi \times h+f\times m\ mod\ q
+> \end{aligned}
+> $$
+>
+> Recall that $f\times h≡g\ mod\ q$ hence:
+>
+> $$
+> a \equiv p\phi\times g+f\times m\ mod\ q
+> $$
+>
+> Now suppose that the polynomial $p\phi\times g+f\times m$ has all of its coefficients lying in the interval from $( \frac{−q}{2} , \frac{q}{2} ]$. This means that there is no change when we reduce the polynomial modulo $q$. That is the polynomial $a$ is exactly $p\phi\times g+f\times m$. In this case when we compute $F_p \times a$ we have:
+>
+> $$
+> \begin{aligned}
+> m'=F_p \times a &\equiv F_p\times(p\phi\times g+f\times m)\ mod\ p \\
+> &\equiv pF_p\times \phi \times g+m\ mod\ p \\
+> &\equiv m\ mod\ p
+> \end{aligned}
+> $$
+>
+> therefore we have recovered the original message $m$. This shows that under the assumption that the polynomial $p\phi\times g+f\times m$ is reduced modulo $q$ we have $m = m' = F_p \times a\ mod\ p$.
+>
+> If the coefficients of the polynomial $p\phi\times g+f\times m$ do not all lie in the interval $( \frac{−q}{2} , \frac{q}{2} ]$ then the decryption process will not recover the original message $m$. In this case we have a decryption failure. Note that the recipient would not know that a decryption failure has occurred. However, for appropriate parameter choices we are able to ensure that the polynomial $p\phi\times g+f\times m$ (almost always) has all of its coefficients in the interval $( \frac{−q}{2} , \frac{q}{2} ]$.
+
+
 
 The `key_priv.npz` and `key_pub.npz` files should appear in current working directory. These are zip compressed NumPy files which contains:
 
@@ -143,3 +174,7 @@ OverflowError: Input is too large for current N
 ```
 
 In this case, you can use the block mode, which splits the input into blocks of the requested size. Make sure you are using this mode in both encrypting and decrypting process.
+
+```shell
+(base)% python etru.py -b enc key_pub.npz plaintext.txt
+```
