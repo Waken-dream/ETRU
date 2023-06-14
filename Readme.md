@@ -86,7 +86,7 @@ If you really want to change the value of $N,\ p,\ q$, modify the `eisenstein_en
 >
 > therefore we have recovered the original message $m$. This shows that under the assumption that the polynomial $p\phi\times g+f\times m$ is reduced modulo $q$ we have $m = m' = F_p \times a\ mod\ p$.
 >
-> If the coefficients of the polynomial $p\phi\times g+f\times m$ do not all lie in the interval $( \frac{−q}{2} , \frac{q}{2} ]$ then the decryption process will not recover the original message $m$. In this case we have a decryption failure. Note that the recipient would not know that a decryption failure has occurred. However, for appropriate parameter choices we are able to ensure that the polynomial $p\phi\times g+f\times m$ (almost always) has all of its coefficients in the interval $( \frac{−q}{2} , \frac{q}{2} ]$.
+> If the coefficients of the polynomial $p\phi\times g+f\times m$ do not all lie in the interval $( \frac{−q}{2} , \frac{q}{2} ]$ then the decryption process will not recover the original message $m$. In this case we have a decryption failure. Note that the recipient would not know that a $\textbf{decryption failure}$ has occurred. However, for appropriate parameter choices we are able to ensure that the polynomial $p\phi\times g+f\times m$ (almost always) has all of its coefficients in the interval $( \frac{−q}{2} , \frac{q}{2} ]$.
 
 
 
