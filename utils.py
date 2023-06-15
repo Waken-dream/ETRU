@@ -113,14 +113,14 @@ def eisenstein_encode(Message: str) -> list:
         EisensteinElement(1, 1),
         EisensteinElement(-1, -1),
     ]
-    Message = Message.encode('utf-8')
-    Message = int(binascii.hexlify(Message), 16)
-    Message = helpers.convertToBase7(f"{Message}")
+    Message = Message.encode('utf-8')  # -> bit string
+    Message = int(binascii.hexlify(Message), 16)  # -> int
+    Message = helpers.convertToBase7(f"{Message}")  # -> str
     # The following line is equal to the line above.
     # message = str(convert_to_base7(message))
 
     if len(Message) > N:
-        raise OverflowError("Input String is too large for current N, use block mode")
+        raise OverflowError(f"Input String is too large({len(Message)}) for current N, use block mode")
     encoded_list = []
     for s in Message:
         encoded_list.append(rp_elements[int(s)])
@@ -145,6 +145,8 @@ def eisenstein_decode(EncodedList: list) -> str:
         message += str(index)
     message = helpers.convertFromBase7(message)
     hex_str = hex(int(message))[2:]
+    if len(hex_str)%2 != 0:
+        hex_str+=b'0'
     byte_str = binascii.unhexlify(hex_str)
     decoded_message = byte_str.decode('utf-8')
     return decoded_message

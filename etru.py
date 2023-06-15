@@ -17,6 +17,7 @@ Options:
   -h, --help         Show this screen.
   -d, --debug        Debug mode.
 '''
+import math
 import sys
 
 from docopt import docopt
@@ -60,24 +61,42 @@ def encrypt(pub_key, input_str: str, block=False) -> np.array:
             raise OverflowError("Input String is too large for current N, use block mode")
         output = etru.encrypt(msg_poly, EisensteinPolynomial(_generate_random_ploy(etru.N // 8))).coefficients
     else:
-        input_arr = np.fromiter((ord(char) for char in input_str), dtype=np.int64)
-        input_arr = np.trim_zeros(input_arr)
-        input_arr = padding_encode(input_arr, 2 * etru.N)
+        rp_elements = [
+            EisensteinElement(0, 0),
+            EisensteinElement(1, 0),
+            EisensteinElement(-1, 0),
+            EisensteinElement(0, 1),
+            EisensteinElement(0, -1),
+            EisensteinElement(1, 1),
+            EisensteinElement(-1, -1),
+        ]
+        input_str = input_str.encode('utf-8')
+        input_str = int(binascii.hexlify(input_str),16)
+        input_str = helpers.convertToBase7(f"{input_str}")
+
+        input_arr = [input_str[i:i + n] for i in range(0, len(input_str), n)]
+        if len(input_arr[-1]) < n:
+            # padding the last bit_string to length n
+            input_arr[-1] = input_arr[-1].ljust(n, '0')
+
+        input_arr = list(map(lambda element: [rp_elements[int(i)] for i in element], input_arr))
         # Reshape it into a two-dimensional array with a shape of (n, N),
         # where n is automatically determined based on the number of elements in the array and the value of N
-        input_arr = input_arr.reshape((-1, etru.N))
+        # input_arr = input_arr.reshape((-1, etru.N))
         output = np.array([])
-        block_count = input_arr.shape[0]
-        for i, b in enumerate(input_arr, start=1):
-            block_output = etru.encrypt(EisensteinPolynomial(list(b)),
+        block_count = len(input_arr)
+        for i in range(block_count):
+            msg_poly = EisensteinPolynomial(input_arr[i])
+            block_output = etru.encrypt(msg_poly,
                                         EisensteinPolynomial(_generate_random_ploy(etru.N // 8))).coefficients
-            if len(block_output) < 2 * etru.N:
-                block_output = np.pad(block_output, (0, 2 * etru.N - len(block_output)), 'constant')
+
+            # if len(block_output) < 2 * etru.N:
+            # block_output = np.pad(block_output, (0, 2 * etru.N - len(block_output)), 'constant')
             output = np.concatenate((output, block_output))
     return np.array(output).flatten()
 
 
-def decrypt(priv_key_file, input_arr: list, block=False):
+def decrypt(priv_key_file, input_arr: list, block=False) -> list:
     priv_key = np.load(priv_key_file, allow_pickle=True)
     p = EisensteinElement(priv_key['p'].item().x, priv_key['p'].item().y)
     q = EisensteinElement(priv_key['q'].item().x, priv_key['q'].item().y)
@@ -88,25 +107,31 @@ def decrypt(priv_key_file, input_arr: list, block=False):
     # input_arr = np.trim_zeros(input_arr)
 
     if not block:
-        if 2 * etru.N < len(input_arr):
+        if etru.N < len(input_arr):
             raise OverflowError("Input is too large for current N")
         input = EisensteinPolynomial(input_arr)
         return etru.decrypt(input).coefficients
     else:
-        input = input.reshape((-1, etru.N))
+        input = np.array(input_arr).reshape((-1, n))
         output = np.array([])
         block_count = input.shape[0]
         for i, b in enumerate(input, start=1):
             block_output = etru.decrypt(EisensteinPolynomial(list(b))).coefficients
-            if len(block_output) < etru.N:
-                block_output = np.pad(block_output, (0, etru.N - len(block_output)), 'constant')
+            #if len(block_output) < etru.N:
+                #block_output = np.pad(block_output, (0, etru.N - len(block_output)), 'constant')
             output = np.concatenate((output, block_output))
-        return padding_decode(output, etru.N)
+        #return padding_decode(output, etru.N)
+        return list(output.flatten())
 
 
 def verify():
     if not Debug:
         raise NotImplementedError("Verify is specially designed for Debug mode")
+
+
+def calculate_decimal_digits(n):
+    decimal_digits = math.ceil((n * math.log2(7)) / math.log2(10))
+    return decimal_digits
 
 
 if __name__ == "__main__":
@@ -116,6 +141,8 @@ if __name__ == "__main__":
     N = 251
     p = EisensteinElement(2, 3)
     q = EisensteinElement(0, 167)
+    n = (calculate_decimal_digits(N) - 1) // 2 - 2
+    n *= 2  # n must be odd
     if args['--debug']:
         Debug = True
 
@@ -169,7 +196,7 @@ if __name__ == "__main__":
             else:
                 output = output.tolist()
                 o = [item for out in output for item in (out.x, out.y)]
-                print(o)
+                # print(o)
                 output_string = ''.join(chr(0x10000 + num) if num < 0 else chr(num) for num in o)
                 with open("ciphertext.txt", "w") as file:
                     file.write(output_string)
@@ -180,8 +207,8 @@ if __name__ == "__main__":
             input_arr = [ord(char) - 0x10000 if ord(char) >= 0x10000 else ord(char)
                          for char in input_str]
             input_arr = list(map(lambda x: x - 65536 if x > 10000 else x, input_arr))
-            print("-----------------------------")
-            #print(input_arr)
+            # print("-----------------------------")
+            # print(input_arr)
             input_arr = [EisensteinElement(input_arr[i], input_arr[i + 1])
                          for i in range(0, len(input_arr), 2)]
             output = decrypt(args['PRIV_KEY_FILE'], input_arr, block=block)
